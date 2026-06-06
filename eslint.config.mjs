@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Skills instaladas: no es nuestro código, no lo lintamos.
+    ".agents/**",
+    // Utilidad de generación de assets (one-off con sharp).
+    "make-logo.mjs",
   ]),
 ]);
 

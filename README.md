@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Emilia Bonita
 
-## Getting Started
+Landing page de una sola página para la cafetería **Emilia Bonita**, en Huixtla, Chiapas, México. Café de origen y antojos hechos a mano: una pieza cálida, artesanal y con identidad propia, lejos de la estética genérica.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** con design tokens en CSS variables
+- **Motion** (Framer Motion) para animaciones y reveals on-scroll
+- **Phosphor Icons** para iconografía
+- Listo para desplegar en **Vercel**
+
+## Arquitectura (MVVM)
+
+La lógica, los datos y la vista están separados para que el proyecto escale:
+
+```
+src/
+├─ models/         MODEL · tipos + datos puros (sin React)
+│   ├─ menu.types.ts      tipos del menú + formato de precio
+│   ├─ menu.data.ts       la carta completa (transcripción exacta)
+│   └─ business.data.ts   nombre, ubicación, Instagram, navegación
+│
+├─ viewmodels/     VIEWMODEL · hooks con estado y acciones (sin JSX)
+│   ├─ useMenu.ts          agrupa categorías y maneja la selección
+│   ├─ useScrollSpy.ts     sección activa vía IntersectionObserver
+│   └─ useReveal.ts        estado de las animaciones on-scroll
+│
+├─ views/          VIEW · componentes presentacionales (sin lógica de negocio)
+│   ├─ sections/   Hero · MenuSection · About · Location · Footer
+│   └─ components/ Navbar · LogoSlot · MenuCard · CategoryTabs · GrainOverlay · Reveal
+│
+├─ app/            Next.js App Router (layout + page componen las vistas)
+└─ styles/         tokens.css (variables) · globals.css
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Reglas: las **views** no contienen lógica de negocio (solo reciben props), los **viewmodels** no contienen JSX y los **models** no importan React.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Correr en local
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Requisitos: Node.js 18.18 o superior.
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Abre [http://localhost:3000](http://localhost:3000).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Scripts disponibles:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Script          | Qué hace                          |
+| --------------- | --------------------------------- |
+| `npm run dev`   | Servidor de desarrollo            |
+| `npm run build` | Build de producción               |
+| `npm run start` | Sirve el build de producción      |
+| `npm run lint`  | Linting con ESLint                |
 
-## Deploy on Vercel
+## Desplegar en Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Opción A · CLI**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm i -g vercel      # solo la primera vez
+vercel               # despliegue de preview
+vercel deploy --prod # despliegue a producción
+```
+
+**Opción B · desde Git**
+
+1. Sube el repo a GitHub, GitLab o Bitbucket.
+2. En [vercel.com/new](https://vercel.com/new) importa el repositorio.
+3. Vercel detecta Next.js automáticamente. No hace falta configurar nada.
+4. Deploy.
+
+Tras el despliegue, actualiza `metadataBase` en `src/app/layout.tsx` con el dominio definitivo para que las OG tags apunten bien.
+
+## Personalización (pendientes marcados con `// TODO`)
+
+Antes de publicar, reemplaza estos placeholders. Busca `// TODO` en el código:
+
+- **Logo**: ya integrado. Los PNG `public/logo-emilia-bonita.png` (crema) y `public/logo-emilia-bonita-green.png` (verde) se generan desde `public/logo_maria_bonita.jpeg` recortando el fondo verde a transparente con `node make-logo.mjs` (usa `sharp`). Si cambia el logo, reemplaza el JPEG y vuelve a correr el script.
+- **Favicon** (`src/app/icon.png`): generado del mismo emblema (crema sobre verde).
+- **Fotos** (Hero y About): hoy usan imágenes de relleno (picsum) con un duotono verde. Sustitúyelas por fotos reales del café en `/public` y cámbialas a `next/image`.
+- **Datos de contacto** (`src/models/business.data.ts`): dirección, teléfono y WhatsApp, horarios, coordenadas y mapa con pin exacto ya están cargados (más los datos estructurados `LocalBusiness` para SEO local). Edita ahí si algo cambia.
+- **Crédito** (`src/views/sections/Footer.tsx`): agrega el crédito del autor o estudio.
+- **Dominio** (`src/app/layout.tsx`): `metadataBase`.
+
+## Notas de diseño
+
+- **Paleta**: verde de bosque (color del logo) como protagonista, crema cálida como página de carta legible, espresso para profundidad. Definida en `src/styles/tokens.css`. Contraste verificado a WCAG AA.
+- **Tipografía**: Bricolage Grotesque (titulares, humanista y con carácter), Hanken Grotesk (cuerpo) y Caveat (notas manuscritas puntuales).
+- **Accesibilidad**: navegación por teclado, enlace para saltar al contenido, `prefers-reduced-motion` respetado, foco visible y contraste AA.
+- **Sin librerías de UI genéricas**: el diseño es propio, con tokens, radios por rol y curvas de easing custom.

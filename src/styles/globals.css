@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* No escanear las skills instaladas: sus ejemplos de codigo contienen clases
+   de Tailwind que, si no, generan utilidades muertas y engordan el CSS. */
+@source not "../../.agents";
+
+/* ============================================================
+   Tailwind theme mapping (inline -> utilities use the token vars
+   defined in tokens.css). next/font sets --font-bricolage,
+   --font-hanken y --font-caveat sobre <html>.
+   ============================================================ */
+/* Fuentes en bloque NO inline: así --font-display/body/hand SÍ se emiten a
+   :root y resuelven tanto en utilidades (font-display) como en CSS propio
+   (body, h1-h4, .hand). next/font define --font-bricolage/hanken/caveat. */
+@theme {
+  --font-display: var(--font-bricolage);
+  --font-body: var(--font-hanken);
+  --font-hand: var(--font-caveat);
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-green-deep: var(--green-deep);
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-espresso: var(--espresso);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-on-green: var(--on-green);
+  --color-on-green-dim: var(--on-green-dim);
+  --color-latte: var(--latte);
+  --color-terracotta: var(--terracotta);
+
+  --radius-pill: var(--r-pill);
+  --radius-card: var(--r-card);
+  --radius-img: var(--r-img);
+  --radius-input: var(--r-input);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* La marca insiste en una sola identidad cálida: bloqueamos el tema. */
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden; /* fallback para navegadores sin soporte de clip */
+  overflow-x: clip; /* clip NO crea contenedor de scroll: el scroll vertical
+                       se queda en el viewport (html), no en el body */
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em; /* piso de -0.04em respetado */
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background-color: var(--green);
+  color: var(--on-green);
+}
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Desplazamiento de anclas para que el nav sticky no tape los títulos */
+.anchor {
+  scroll-margin-top: 88px;
+}
+.anchor-menu {
+  scroll-margin-top: 150px; /* nav + barra de categorías sticky */
+}
+
+/* ============================================================
+   Tipografía manuscrita (Caveat): uso quirúrgico, notas de libreta
+   ============================================================ */
+.hand {
+  font-family: var(--font-hand), cursive;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+/* ============================================================
+   Feedback de press en cualquier elemento accionable
+   ============================================================ */
+.pressable {
+  transition: transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+.pressable:active {
+  transform: scale(0.97);
+}
+
+/* Hover solo en dispositivos con puntero fino (no se "pega" en touch) */
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-3px);
+  }
+}
+.lift {
+  transition: transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+/* ============================================================
+   Grano de papel: overlay fijo, pointer-events none, muy sutil.
+   (Único lugar permitido para grano: capa fija que no hace scroll.)
+   ============================================================ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* ============================================================
+   Reveal base: el contenido es visible por defecto y la animación
+   solo lo "mejora". Nunca ocultamos contenido detrás de una clase.
+   (Motion gestiona el matiz de reduced-motion vía useReducedMotion.)
+   ============================================================ */
+
+/* ============================================================
+   Reduced motion: sin movimiento, estados instantáneos
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .grain-overlay {
+    display: none; /* incluso el grano estático fuera por si acaso */
+  }
+}
+
+/* Scrollbar discreta y cálida (no afecta accesibilidad) */
+* {
+  scrollbar-color: var(--green-soft) transparent;
+}
+
+/* Oculta la scrollbar horizontal de las tabs de categorías */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

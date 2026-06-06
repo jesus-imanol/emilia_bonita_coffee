@@ -1,0 +1,59 @@
+/* ============================================================
+   Emilia Bonita : Design Tokens
+   Cafetería artesanal · Huixtla, Chiapas
+   Concepto: "Café de origen, hecho a mano." Verde de bosque
+   como color protagonista (es el color del logo), crema como
+   página de libreta legible, espresso para profundidad.
+   Todos los valores de texto verificados a contraste WCAG AA.
+   ============================================================ */
+
+:root {
+  /* ---- Color: superficies ---- */
+  --cream: #f4efe3;        /* off-white cálido, ligeramente tintado al verde, no beige genérico */
+  --cream-deep: #ece4d4;   /* superficie alterna sutil (hover, separaciones) */
+  --green-deep: #1e382a;   /* fondo del hero y footer: aquí brilla el logo blanco */
+  --green: #355c42;        /* ACENTO ÚNICO: botones, enlaces, detalles */
+  --green-soft: #5c7e63;   /* verde claro decorativo sobre crema */
+  --espresso: #281c14;     /* banda "Sobre nosotros", profundidad */
+
+  /* ---- Color: tinta / texto ---- */
+  --ink: #1f211c;          /* cuerpo sobre crema  (≈14:1) */
+  --ink-soft: #4b4a41;     /* texto secundario sobre crema (≈6.8:1) */
+  --on-green: #f4efe3;     /* texto sobre verde/espresso (≈11:1) */
+  --on-green-dim: #bfd0be; /* texto secundario sobre verde (≈7.3:1) */
+
+  /* ---- Color: tierra (decorativo, muy puntual) ---- */
+  --latte: #c9a77c;
+  --terracotta: #b45b3c;
+
+  /* ---- Líneas ---- */
+  --line: rgba(31, 33, 28, 0.12);
+  --line-strong: rgba(31, 33, 28, 0.22);
+  --line-on-green: rgba(244, 239, 227, 0.16);
+
+  /* ---- Radios (sistema por rol, documentado) ----
+     pill -> botones y chips · card -> tarjetas · img -> fotos · input -> campos */
+  --r-pill: 999px;
+  --r-card: 16px;
+  --r-img: 22px;
+  --r-input: 12px;
+
+  /* ---- Sombras (tintadas al tono de fondo, suaves; nunca borde + sombra grande juntos) ---- */
+  --shadow-soft: 0 1px 2px rgba(31, 33, 28, 0.05), 0 10px 26px rgba(31, 33, 28, 0.06);
+  --shadow-lift: 0 16px 38px rgba(31, 33, 28, 0.12);
+
+  /* ---- Easings (curvas custom: fuertes, sin rebote) ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* ---- Duraciones (micro-interacciones cortas) ---- */
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 600ms;
+
+  /* ---- Z-index semántico (sin valores arbitrarios sueltos) ---- */
+  --z-nav: 50;
+  --z-overlay: 60;
+  --z-grain: 70;
+}
