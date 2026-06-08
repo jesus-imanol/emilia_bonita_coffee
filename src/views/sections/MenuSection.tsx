@@ -122,7 +122,7 @@ function CategoryBlock({ cat }: { cat: MenuCategory }) {
       >
         {cat.items.map((menuItem) => (
           <motion.li key={menuItem.id} variants={item} className="h-full">
-            <MenuCard item={menuItem} />
+            <MenuCard item={menuItem} category={cat} />
           </motion.li>
         ))}
       </motion.ul>

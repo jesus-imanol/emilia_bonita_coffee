@@ -1,10 +1,21 @@
-import { formatMXN, type MenuItem } from "@/models/menu.types";
+import {
+  formatMXN,
+  type MenuCategory,
+  type MenuItem,
+} from "@/models/menu.types";
+import { AddToCart } from "./AddToCart";
 
 /**
- * VIEW · Tarjeta presentacional de un producto del menú.
- * Componente puro: recibe el item y no contiene lógica de negocio.
+ * VIEW · Tarjeta de un producto del menú. La lógica de carrito vive en
+ * <AddToCart> (que se apoya en los viewmodels); aquí solo se compone.
  */
-export function MenuCard({ item }: { item: MenuItem }) {
+export function MenuCard({
+  item,
+  category,
+}: {
+  item: MenuItem;
+  category: MenuCategory;
+}) {
   const hasVariants = Boolean(item.variants?.length);
 
   return (
@@ -68,10 +79,12 @@ export function MenuCard({ item }: { item: MenuItem }) {
       )}
 
       {item.extra && (
-        <p className="mt-auto pt-3 text-xs font-medium text-ink-soft">
-          + {item.extra}
+        <p className="mt-3 text-xs font-medium text-ink-soft">
+          + {item.extra.label} {formatMXN(item.extra.price)} opcional
         </p>
       )}
+
+      <AddToCart item={item} category={category} />
     </article>
   );
 }

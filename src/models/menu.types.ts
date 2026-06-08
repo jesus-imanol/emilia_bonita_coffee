@@ -18,6 +18,12 @@ export interface PriceVariant {
   price: number; // MXN
 }
 
+/** Complemento opcional con cargo (ej. leche deslactosada +$5). */
+export interface ExtraAddOn {
+  label: string; // ej. "Leche deslactosada"
+  price: number; // MXN que se suman si el cliente lo elige
+}
+
 export interface MenuItem {
   id: string;
   name: string;
@@ -31,8 +37,10 @@ export interface MenuItem {
   note?: string;
   /** Sabores u opciones elegibles, se muestran como chips. */
   options?: string[];
-  /** Cargo extra opcional, ej. "Extra $5". */
-  extra?: string;
+  /** Para crepas: cuántos ingredientes elige el cliente (1 o 2). */
+  picks?: number;
+  /** Complemento opcional con cargo (ej. leche deslactosada +$5). */
+  extra?: ExtraAddOn;
 }
 
 /** Grupo de opciones que aplica a toda una categoría (ej. crepas dulces/saladas). */

@@ -7,8 +7,18 @@ Landing page de una sola página para la cafetería **Emilia Bonita**, en Huixtl
 - **Next.js 16** (App Router) + **TypeScript**
 - **Tailwind CSS v4** con design tokens en CSS variables
 - **Motion** (Framer Motion) para animaciones y reveals on-scroll
+- **Zustand** para el carrito (persistido en localStorage)
 - **Phosphor Icons** para iconografía
 - Listo para desplegar en **Vercel**
+
+## Pedidos por WhatsApp
+
+El cliente arma su pedido desde la carta y lo envía al WhatsApp de la cafetería. No hay backend ni pagos: el carrito vive en el navegador y el botón abre WhatsApp con el pedido ya escrito.
+
+- **Agregar:** los productos sin opciones se suman directo; los que tienen sabor, tamaño o ingredientes (frappes, aguas, crepas) abren una hoja para elegir, con su cantidad y comentario.
+- **Carrito:** botón con contador en el nav (y barra inferior en móvil); panel lateral con líneas editables y subtotal.
+- **Enviar:** arma un mensaje con el pedido, el subtotal, nombre y comentario, y abre `wa.me/<número>`. El cliente indica ahí mismo si es para llevar, en mesa o a domicilio.
+- El número destino sale de `business.data.ts` (`whatsapp`). El "Leche deslactosada (+$5)" del Frapuccino Especialidad es un complemento opcional que suma al elegirlo.
 
 ## Arquitectura (MVVM)
 
@@ -81,7 +91,7 @@ Antes de publicar, reemplaza estos placeholders. Busca `// TODO` en el código:
 
 - **Logo**: ya integrado. Los PNG `public/logo-emilia-bonita.png` (crema) y `public/logo-emilia-bonita-green.png` (verde) se generan desde `public/logo_maria_bonita.jpeg` recortando el fondo verde a transparente con `node make-logo.mjs` (usa `sharp`). Si cambia el logo, reemplaza el JPEG y vuelve a correr el script.
 - **Favicon** (`src/app/icon.png`): generado del mismo emblema (crema sobre verde).
-- **Fotos** (Hero y About): hoy usan imágenes de relleno (picsum) con un duotono verde. Sustitúyelas por fotos reales del café en `/public` y cámbialas a `next/image`.
+- **Fotos** (Hero y About): fotos reales del café, optimizadas con `node make-photos.mjs` (sharp) en `public/fotos/`. Para cambiarlas, reemplaza las fuentes en `public/` y vuelve a correr el script.
 - **Datos de contacto** (`src/models/business.data.ts`): dirección, teléfono y WhatsApp, horarios, coordenadas y mapa con pin exacto ya están cargados (más los datos estructurados `LocalBusiness` para SEO local). Edita ahí si algo cambia.
 - **Crédito** (`src/views/sections/Footer.tsx`): agrega el crédito del autor o estudio.
 - **Dominio** (`src/app/layout.tsx`): `metadataBase`.

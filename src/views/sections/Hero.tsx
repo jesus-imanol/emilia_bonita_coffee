@@ -114,25 +114,23 @@ export function Hero() {
           animate="show"
           className="relative hidden lg:block"
         >
-          <div className="relative aspect-[4/5] overflow-hidden rounded-img">
-            {/* TODO: reemplazar por foto real del café (grano de café, bebidas, el local). */}
+          <div className="relative aspect-[4/5] overflow-hidden rounded-img ring-1 ring-on-green/15">
             <Image
-              src="https://picsum.photos/seed/emilia-bonita-cafe/1100/1375"
-              alt="Bebidas y antojos recién preparados en Emilia Bonita"
+              src="/fotos/frappes.jpg"
+              alt="Frappés de la casa con crema y chocolate en Emilia Bonita"
               fill
               priority
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
-            {/* Duotono verde para que cualquier foto entre en marca */}
-            <div className="absolute inset-0 bg-green-deep/45 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-t from-green-deep/75 via-transparent to-green-deep/15" />
-          </div>
+            {/* Degradado abajo para legibilidad de la nota */}
+            <div className="absolute inset-0 bg-gradient-to-t from-green-deep/80 via-transparent to-transparent" />
 
-          {/* Nota manuscrita tipo libreta */}
-          <span className="hand absolute -bottom-3 left-6 -rotate-6 text-3xl text-cream drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
-            recién hecho
-          </span>
+            {/* Nota manuscrita tipo libreta, dentro de la foto (no se corta) */}
+            <span className="hand absolute bottom-5 left-6 -rotate-3 text-3xl text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">
+              recién hecho
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -4,6 +4,8 @@ import "@/styles/tokens.css";
 import "@/styles/globals.css";
 import { Navbar } from "@/views/components/Navbar";
 import { GrainOverlay } from "@/views/components/GrainOverlay";
+import { CartDrawer } from "@/views/components/CartDrawer";
+import { CartStickyBar } from "@/views/components/CartStickyBar";
 import { BUSINESS } from "@/models/business.data";
 
 // Par tipográfico: display humanista cálido (Bricolage), cuerpo legible
@@ -94,6 +96,8 @@ export default function RootLayout({
         <GrainOverlay />
         <Navbar />
         <main id="contenido">{children}</main>
+        <CartDrawer />
+        <CartStickyBar />
       </body>
     </html>
   );

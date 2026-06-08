@@ -14,7 +14,7 @@ export const MENU: MenuCategory[] = [
     items: [
       {
         id: "hamburguesa-clasica",
-        name: "Clásica",
+        name: "Hamburguesa Clásica",
         note: "c/ papas fritas",
         description:
           "Carne de res, queso manchego, tomate, cebolla caramelizada, lechuga.",
@@ -22,7 +22,7 @@ export const MENU: MenuCategory[] = [
       },
       {
         id: "hamburguesa-de-la-casa",
-        name: "De la casa",
+        name: "Hamburguesa de la casa",
         note: "c/ papas fritas",
         description:
           "Carne de res, chorizo, pimiento, cebolla caramelizada, queso monterey jack, tomate, lechuga.",
@@ -92,8 +92,8 @@ export const MENU: MenuCategory[] = [
       },
     ],
     items: [
-      { id: "crepa-1", name: "1 Ingrediente", price: 70 },
-      { id: "crepa-2", name: "2 Ingredientes", price: 75 },
+      { id: "crepa-1", name: "Crepa 1 Ingrediente", price: 70, picks: 1 },
+      { id: "crepa-2", name: "Crepa 2 Ingredientes", price: 75, picks: 2 },
     ],
   },
   {
@@ -170,7 +170,7 @@ export const MENU: MenuCategory[] = [
           "Cookies and cream",
           "Baileys",
         ],
-        extra: "Extra $5",
+        extra: { label: "Leche deslactosada", price: 5 },
         price: 75,
       },
     ],

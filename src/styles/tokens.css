@@ -53,7 +53,12 @@
   --dur-slow: 600ms;
 
   /* ---- Z-index semántico (sin valores arbitrarios sueltos) ---- */
+  --z-sticky: 45; /* barra "Ver pedido" móvil (debajo del nav) */
   --z-nav: 50;
   --z-overlay: 60;
   --z-grain: 70;
+  /* Carrito por encima del grano (que tiñe con multiply) */
+  --z-cart-backdrop: 80;
+  --z-cart: 90;
+  --z-sheet: 95;
 }

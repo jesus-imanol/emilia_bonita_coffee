@@ -18,9 +18,9 @@ export function About() {
           <Reveal delay={0.05} className="sm:col-span-7">
             <div className="space-y-5 text-lg leading-relaxed text-on-green-dim">
               <p>
-                Emilia Bonita es una cafetería de barrio en Huixtla, Chiapas.
-                Aquí el café de la región se prepara con calma y los antojos se
-                arman a mano, uno por uno.
+                Emilia Bonita es una cafetería en Huixtla, Chiapas. El café de
+                la región se prepara con calma y los antojos se arman a mano, uno
+                por uno.
               </p>
               <p>
                 Nuestra carta empezó en una libreta de espiral, escrita a mano, y
@@ -50,21 +50,39 @@ export function About() {
           </Reveal>
         </div>
 
-        {/* Banda de foto a todo lo ancho */}
-        <Reveal delay={0.05}>
-          <div className="relative mt-14 aspect-[16/9] overflow-hidden rounded-img sm:mt-16">
-            {/* TODO: reemplazar por foto real del local o del café de Emilia Bonita. */}
-            <Image
-              src="https://picsum.photos/seed/emilia-bonita-barra/1600/900"
-              alt="Rincón de la cafetería Emilia Bonita en Huixtla"
-              fill
-              sizes="(min-width: 1024px) 64rem, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-espresso/45 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 to-transparent" />
-          </div>
-        </Reveal>
+        {/* Galería: fotos reales como impresiones sobre la mesa */}
+        <div className="mt-16 grid grid-cols-2 gap-5 sm:mt-20 sm:gap-8">
+          <Reveal delay={0.05}>
+            <figure className="-rotate-2">
+              <div className="rounded-img bg-cream p-2.5 shadow-[var(--shadow-lift)]">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-[12px]">
+                  <Image
+                    src="/fotos/crepa.jpg"
+                    alt="Crepa de durazno con cajeta y azúcar glas"
+                    fill
+                    sizes="(min-width: 1024px) 30rem, 45vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </figure>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <figure className="mt-10 rotate-2">
+              <div className="rounded-img bg-cream p-2.5 shadow-[var(--shadow-lift)]">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-[12px]">
+                  <Image
+                    src="/fotos/frappe-crepa.jpg"
+                    alt="Frappé con crema y crepa de fresa con chocolate"
+                    fill
+                    sizes="(min-width: 1024px) 30rem, 45vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </figure>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

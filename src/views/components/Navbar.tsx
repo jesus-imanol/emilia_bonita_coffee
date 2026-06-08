@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { InstagramLogo, List, X } from "@phosphor-icons/react";
 import { BUSINESS } from "@/models/business.data";
 import { useScrollSpy } from "@/viewmodels/useScrollSpy";
+import { CartButton } from "./CartButton";
 
 const NAV_IDS = BUSINESS.nav.map((n) => n.id);
 
@@ -103,6 +104,8 @@ export function Navbar() {
             <InstagramLogo size={18} weight="bold" />
             Instagram
           </a>
+
+          <CartButton tone={solid ? "dark" : "light"} />
 
           <button
             type="button"
