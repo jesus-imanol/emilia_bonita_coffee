@@ -24,11 +24,10 @@ export function Hero() {
   const rise: Variants = reduce
     ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.3 } } }
     : {
-        hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
+        hidden: { opacity: 0, y: 20 },
         show: {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
           transition: { duration: 0.6, ease: EASE },
         },
       };

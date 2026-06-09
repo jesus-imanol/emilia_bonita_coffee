@@ -12,27 +12,22 @@ export interface RevealConfig {
   duration?: number;
   /** Retardo (segundos). */
   delay?: number;
-  /** Difuminado inicial para blur masking (px). */
-  blur?: number;
 }
 
 /**
  * VIEWMODEL · Estado de un reveal on-scroll. Devuelve props listos
- * para <motion.*>. Respeta prefers-reduced-motion (cae a un fade
- * suave, sin desplazamiento ni blur).
+ * para <motion.*>. Solo opacidad + desplazamiento (GPU, baratos): nada
+ * de filter blur, que es caro de animar al hacer scroll. Respeta
+ * prefers-reduced-motion (cae a un fade suave).
  */
 export function useReveal(config: RevealConfig = {}) {
   const reduce = useReducedMotion();
-  const { y = 22, duration = 0.6, delay = 0, blur = 6 } = config;
+  const { y = 22, duration = 0.6, delay = 0 } = config;
 
   return {
     reduce,
-    initial: reduce
-      ? { opacity: 0 }
-      : { opacity: 0, y, filter: `blur(${blur}px)` },
-    whileInView: reduce
-      ? { opacity: 1 }
-      : { opacity: 1, y: 0, filter: "blur(0px)" },
+    initial: reduce ? { opacity: 0 } : { opacity: 0, y },
+    whileInView: reduce ? { opacity: 1 } : { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.3, margin: "0px 0px -10% 0px" } as const,
     transition: {
       duration: reduce ? 0.25 : duration,
@@ -65,11 +60,10 @@ export function useStaggerReveal(stagger = 0.05) {
         show: { opacity: 1, transition: { duration: 0.25 } },
       }
     : {
-        hidden: { opacity: 0, y: 16, filter: "blur(5px)" },
+        hidden: { opacity: 0, y: 16 },
         show: {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
           transition: { duration: 0.55, ease: EASE_OUT },
         },
       };

@@ -41,7 +41,7 @@ export function CategoryTabs({ items, active, onSelect }: CategoryTabsProps) {
   };
 
   return (
-    <div className="sticky top-[64px] z-40 border-b border-[var(--line)] bg-cream/85 supports-[backdrop-filter]:bg-cream/70 backdrop-blur-md sm:top-[68px]">
+    <div className="sticky top-[64px] z-40 border-b border-[var(--line)] bg-cream/95 sm:top-[68px]">
       <div
         ref={scrollerRef}
         role="tablist"

@@ -29,7 +29,7 @@ export function Navbar() {
   }, []);
 
   const shell = solid
-    ? "bg-cream/85 supports-[backdrop-filter]:bg-cream/70 backdrop-blur-md border-[var(--line)] text-green-deep"
+    ? "bg-cream/95 border-[var(--line)] text-green-deep"
     : "bg-transparent border-transparent text-on-green";
 
   // WhatsApp: relleno verde cuando la barra es sólida; contorno sobre el hero.
