@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { InstagramLogo, List, X } from "@phosphor-icons/react";
+import { InstagramLogo, List, WhatsappLogo, X } from "@phosphor-icons/react";
 import { BUSINESS } from "@/models/business.data";
 import { useScrollSpy } from "@/viewmodels/useScrollSpy";
 import { CartButton } from "./CartButton";
@@ -32,9 +32,15 @@ export function Navbar() {
     ? "bg-cream/85 supports-[backdrop-filter]:bg-cream/70 backdrop-blur-md border-[var(--line)] text-green-deep"
     : "bg-transparent border-transparent text-on-green";
 
-  const igClass = solid
-    ? "bg-green text-on-green"
-    : "border border-on-green/40 text-on-green";
+  // WhatsApp: relleno verde cuando la barra es sólida; contorno sobre el hero.
+  const waClass = solid
+    ? "bg-green text-on-green hover:bg-green-deep"
+    : "border border-on-green/40 text-on-green hover:bg-on-green/10";
+
+  // Saludo prellenado: contacto directo, distinto del carrito.
+  const waUrl = `${BUSINESS.whatsapp.url}?text=${encodeURIComponent(
+    "Hola Emilia Bonita!"
+  )}`;
 
   return (
     <header
@@ -93,16 +99,25 @@ export function Navbar() {
           })}
         </ul>
 
-        {/* Instagram + menú móvil */}
-        <div className="flex items-center gap-2">
+        {/* Contacto + carrito + menú móvil */}
+        <div className="flex items-center gap-1.5">
           <a
             href={BUSINESS.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`pressable hidden items-center gap-2 rounded-pill px-4 py-2 text-sm font-semibold sm:inline-flex ${igClass}`}
+            aria-label="Instagram"
+            className="pressable hidden h-10 w-10 items-center justify-center rounded-pill opacity-90 transition-opacity hover:opacity-100 sm:inline-flex"
           >
-            <InstagramLogo size={18} weight="bold" />
-            Instagram
+            <InstagramLogo size={20} weight="bold" />
+          </a>
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Escríbenos por WhatsApp"
+            className={`pressable inline-flex h-10 w-10 items-center justify-center rounded-pill transition-colors ${waClass}`}
+          >
+            <WhatsappLogo size={20} weight="bold" />
           </a>
 
           <CartButton tone={solid ? "dark" : "light"} />

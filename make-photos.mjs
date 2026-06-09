@@ -24,6 +24,31 @@ const jobs = [
     brightness: 1.05,
     saturation: 1.05,
   },
+  // Fotos para la galería de antojos (atajos a la carta).
+  {
+    in: "public/hamburguesas/hamburguesa_papas.jpeg",
+    out: "public/fotos/hamburguesa.jpg",
+    brightness: 1.04,
+    saturation: 1.06,
+  },
+  {
+    in: "public/frappes/hotdog_frape_oreo.jpeg",
+    out: "public/fotos/hotdog.jpg",
+    brightness: 1.05,
+    saturation: 1.05,
+  },
+  {
+    in: "public/frappes/frappe_002.jpeg",
+    out: "public/fotos/frappe.jpg",
+    brightness: 1.04,
+    saturation: 1.06,
+  },
+  {
+    in: "public/frapucchino/frapucchino.jpeg",
+    out: "public/fotos/cafe.jpg",
+    brightness: 1.05,
+    saturation: 1.05,
+  },
 ];
 
 for (const j of jobs) {

@@ -1,5 +1,6 @@
 import { BUSINESS } from "@/models/business.data";
 import { Hero } from "@/views/sections/Hero";
+import { Antojos } from "@/views/sections/Antojos";
 import { MenuSection } from "@/views/sections/MenuSection";
 import { About } from "@/views/sections/About";
 import { Location } from "@/views/sections/Location";
@@ -61,6 +62,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
+      <Antojos />
       <MenuSection />
       <About />
       <Location />

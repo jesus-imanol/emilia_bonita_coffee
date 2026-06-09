@@ -6,6 +6,7 @@ import { Navbar } from "@/views/components/Navbar";
 import { GrainOverlay } from "@/views/components/GrainOverlay";
 import { CartDrawer } from "@/views/components/CartDrawer";
 import { CartStickyBar } from "@/views/components/CartStickyBar";
+import { ScrollToTop } from "@/views/components/ScrollToTop";
 import { BUSINESS } from "@/models/business.data";
 
 // Par tipográfico: display humanista cálido (Bricolage), cuerpo legible
@@ -98,6 +99,7 @@ export default function RootLayout({
         <main id="contenido">{children}</main>
         <CartDrawer />
         <CartStickyBar />
+        <ScrollToTop />
       </body>
     </html>
   );

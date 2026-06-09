@@ -10,7 +10,7 @@ export const MENU: MenuCategory[] = [
   {
     id: "hamburguesas",
     name: "Hamburguesas",
-    tagline: "Carne de res a la parrilla. Las dos van con papas fritas.",
+    tagline: "Carne de res a la plancha. Las dos van con papas fritas.",
     items: [
       {
         id: "hamburguesa-clasica",
@@ -38,7 +38,7 @@ export const MENU: MenuCategory[] = [
       {
         id: "hotdog-tradicional",
         name: "Tradicional",
-        description: "Salchicha, pollo, tomate y cebolla.",
+        description: "Salchicha, pollo, jamón, tomate y cebolla.",
         price: 45,
       },
       {
@@ -186,7 +186,12 @@ export const MENU: MenuCategory[] = [
         options: ["Chocolate", "Vainilla", "Cookies and cream"],
         price: 65,
       },
-      { id: "fria-refrescos", name: "Refrescos embotellados", price: 30 },
+      {
+        id: "fria-refrescos",
+        name: "Refresco en lata",
+        note: "Coca Cola",
+        price: 30,
+      },
       { id: "fria-agua", name: "Agua embotellada", price: 25 },
       {
         id: "fria-aguas",
