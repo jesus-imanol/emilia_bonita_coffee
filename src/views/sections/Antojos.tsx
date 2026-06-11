@@ -36,7 +36,7 @@ export function Antojos() {
       <div className="mx-auto max-w-6xl px-4 pt-20 sm:px-6 sm:pt-28">
         <Reveal>
           <p className="hand text-3xl text-green-soft">se nos antoja</p>
-          <h2 className="mt-1 font-display text-4xl font-bold tracking-tight text-green-deep sm:text-5xl">
+          <h2 className="mt-1 font-display text-4xl font-bold tracking-tight text-bean sm:text-5xl">
             Para abrir boca
           </h2>
         </Reveal>
@@ -55,7 +55,7 @@ export function Antojos() {
                   sizes="(min-width: 1024px) 22vw, 45vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-green-deep/85 via-green-deep/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-bean/85 via-bean/10 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 p-4">
                   <span className="font-display text-lg font-semibold text-cream">
                     {a.label}

@@ -2,11 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Hanken_Grotesk, Caveat } from "next/font/google";
 import "@/styles/tokens.css";
 import "@/styles/globals.css";
-import { Navbar } from "@/views/components/Navbar";
-import { GrainOverlay } from "@/views/components/GrainOverlay";
-import { CartDrawer } from "@/views/components/CartDrawer";
-import { CartStickyBar } from "@/views/components/CartStickyBar";
-import { ScrollToTop } from "@/views/components/ScrollToTop";
 import { BUSINESS } from "@/models/business.data";
 
 // Par tipográfico: display humanista cálido (Bricolage), cuerpo legible
@@ -68,7 +63,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1e382a",
+  themeColor: "#241712",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -90,16 +85,11 @@ export default function RootLayout({
         </noscript>
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:rounded-pill focus:bg-green focus:px-4 focus:py-2 focus:font-semibold focus:text-on-green"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:rounded-pill focus:bg-green focus:px-4 focus:py-2 focus:font-semibold focus:text-on-dark"
         >
           Saltar al contenido
         </a>
-        <GrainOverlay />
-        <Navbar />
         <main id="contenido">{children}</main>
-        <CartDrawer />
-        <CartStickyBar />
-        <ScrollToTop />
       </body>
     </html>
   );

@@ -32,14 +32,14 @@ function Chip({
       onClick={onClick}
       className={`pressable inline-flex items-center gap-1.5 rounded-pill border px-3.5 py-2 text-sm font-medium transition-colors ${
         selected
-          ? "border-green bg-green text-on-green"
+          ? "border-green bg-green text-on-dark"
           : "border-[var(--line-strong)] text-ink hover:border-green/50"
       }`}
     >
       {selected && <Check size={14} weight="bold" />}
       {label}
       {trailing && (
-        <span className={selected ? "text-on-green/90" : "text-ink-soft"}>
+        <span className={selected ? "text-on-dark/90" : "text-ink-soft"}>
           {trailing}
         </span>
       )}
@@ -113,7 +113,7 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
       <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5">
         {spec.needsFlavor && (
           <section>
-            <h4 className="font-display text-base font-semibold text-green-deep">
+            <h4 className="font-display text-base font-semibold text-bean">
               Elige un sabor
             </h4>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -131,7 +131,7 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
 
         {spec.needsSize && (
           <section>
-            <h4 className="font-display text-base font-semibold text-green-deep">
+            <h4 className="font-display text-base font-semibold text-bean">
               Tamaño
             </h4>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -151,7 +151,7 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
         {spec.needsIngredients && (
           <section>
             <div className="flex items-baseline justify-between">
-              <h4 className="font-display text-base font-semibold text-green-deep">
+              <h4 className="font-display text-base font-semibold text-bean">
                 Elige tus ingredientes
               </h4>
               <span className="text-sm font-medium tabular-nums text-ink-soft">
@@ -199,7 +199,7 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
               <span
                 className={`inline-flex h-6 w-6 items-center justify-center rounded-pill border ${
                   draft.extra
-                    ? "border-green bg-green text-on-green"
+                    ? "border-green bg-green text-on-dark"
                     : "border-[var(--line-strong)]"
                 }`}
               >
@@ -212,7 +212,7 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
         <section>
           <label
             htmlFor="product-note"
-            className="font-display text-base font-semibold text-green-deep"
+            className="font-display text-base font-semibold text-bean"
           >
             Comentario (opcional)
           </label>
@@ -234,7 +234,7 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
           type="button"
           onClick={handleAdd}
           disabled={!complete}
-          className="pressable flex flex-1 items-center justify-center gap-2 rounded-pill bg-green px-5 py-3 text-base font-semibold text-on-green transition-colors hover:bg-green-deep disabled:cursor-not-allowed disabled:opacity-40"
+          className="pressable flex flex-1 items-center justify-center gap-2 rounded-pill bg-green px-5 py-3 text-base font-semibold text-on-dark transition-colors hover:bg-bean disabled:cursor-not-allowed disabled:opacity-40"
         >
           Agregar
           <span className="tabular-nums">{formatMXN(unitPrice * draft.qty)}</span>

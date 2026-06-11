@@ -31,7 +31,7 @@ export function QtyStepper({
         onClick={() => onChange(value - 1)}
         disabled={value <= min}
         aria-label="Quitar uno"
-        className={`pressable inline-flex ${dim} items-center justify-center rounded-pill text-green-deep disabled:opacity-35`}
+        className={`pressable inline-flex ${dim} items-center justify-center rounded-pill text-bean disabled:opacity-35`}
       >
         <Minus size={16} weight="bold" />
       </button>
@@ -45,7 +45,7 @@ export function QtyStepper({
         type="button"
         onClick={() => onChange(value + 1)}
         aria-label="Agregar uno"
-        className={`pressable inline-flex ${dim} items-center justify-center rounded-pill text-green-deep`}
+        className={`pressable inline-flex ${dim} items-center justify-center rounded-pill text-bean`}
       >
         <Plus size={16} weight="bold" />
       </button>

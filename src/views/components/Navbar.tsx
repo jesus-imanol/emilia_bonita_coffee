@@ -29,13 +29,13 @@ export function Navbar() {
   }, []);
 
   const shell = solid
-    ? "bg-cream/95 border-[var(--line)] text-green-deep"
-    : "bg-transparent border-transparent text-on-green";
+    ? "bg-cream/95 border-[var(--line)] text-bean"
+    : "bg-transparent border-transparent text-on-dark";
 
   // WhatsApp: relleno verde cuando la barra es sólida; contorno sobre el hero.
   const waClass = solid
-    ? "bg-green text-on-green hover:bg-green-deep"
-    : "border border-on-green/40 text-on-green hover:bg-on-green/10";
+    ? "bg-green text-on-dark hover:bg-bean"
+    : "border border-on-dark/40 text-on-dark hover:bg-on-dark/10";
 
   // Saludo prellenado: contacto directo, distinto del carrito.
   const waUrl = `${BUSINESS.whatsapp.url}?text=${encodeURIComponent(
@@ -152,7 +152,7 @@ export function Navbar() {
                   <a
                     href={`#${link.id}`}
                     onClick={() => setOpen(false)}
-                    className={`pressable block rounded-input px-4 py-3 text-base text-green-deep ${
+                    className={`pressable block rounded-input px-4 py-3 text-base text-bean ${
                       active === link.id ? "bg-green/10 font-semibold" : "font-medium"
                     }`}
                   >
@@ -166,7 +166,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="pressable flex items-center justify-center gap-2 rounded-pill bg-green px-4 py-3 text-base font-semibold text-on-green"
+                  className="pressable flex items-center justify-center gap-2 rounded-pill bg-green px-4 py-3 text-base font-semibold text-on-dark"
                 >
                   <InstagramLogo size={20} weight="bold" />
                   {BUSINESS.instagram.handle}

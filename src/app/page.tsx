@@ -1,4 +1,9 @@
 import { BUSINESS } from "@/models/business.data";
+import { Navbar } from "@/views/components/Navbar";
+import { GrainOverlay } from "@/views/components/GrainOverlay";
+import { CartDrawer } from "@/views/components/CartDrawer";
+import { CartStickyBar } from "@/views/components/CartStickyBar";
+import { ScrollToTop } from "@/views/components/ScrollToTop";
 import { Hero } from "@/views/sections/Hero";
 import { Antojos } from "@/views/sections/Antojos";
 import { MenuSection } from "@/views/sections/MenuSection";
@@ -61,12 +66,17 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <GrainOverlay />
+      <Navbar />
       <Hero />
       <Antojos />
       <MenuSection />
       <About />
       <Location />
       <Footer />
+      <CartDrawer />
+      <CartStickyBar />
+      <ScrollToTop />
     </>
   );
 }

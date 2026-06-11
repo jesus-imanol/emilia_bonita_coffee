@@ -46,7 +46,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="anchor relative isolate overflow-hidden bg-green-deep text-on-green"
+      className="anchor relative isolate overflow-hidden bg-bean text-on-dark"
     >
       {/* Profundidad sutil (no glow de IA): un aclarado radial muy tenue */}
       <div
@@ -54,7 +54,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(120% 90% at 18% 8%, rgba(92,126,99,0.28), transparent 55%)",
+            "radial-gradient(120% 90% at 18% 8%, rgba(123,86,58,0.45), transparent 55%)",
         }}
       />
 
@@ -81,7 +81,7 @@ export function Hero() {
 
           <motion.p
             variants={rise}
-            className="mt-6 max-w-md text-lg leading-relaxed text-on-green-dim"
+            className="mt-6 max-w-md text-lg leading-relaxed text-on-dark-dim"
           >
             {BUSINESS.tagline}
           </motion.p>
@@ -89,7 +89,7 @@ export function Hero() {
           <motion.div variants={rise} className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href="#menu"
-              className="pressable lift inline-flex items-center gap-2 rounded-pill bg-cream px-6 py-3.5 text-base font-semibold text-green-deep hover:bg-white"
+              className="pressable lift inline-flex items-center gap-2 rounded-pill bg-cream px-6 py-3.5 text-base font-semibold text-bean hover:bg-white"
             >
               Ver la carta
               <ArrowDown size={18} weight="bold" />
@@ -98,7 +98,7 @@ export function Hero() {
               href={BUSINESS.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="pressable inline-flex items-center gap-2 rounded-pill border border-on-green/40 px-6 py-3.5 text-base font-semibold text-on-green transition-colors hover:bg-on-green/10"
+              className="pressable inline-flex items-center gap-2 rounded-pill border border-on-dark/40 px-6 py-3.5 text-base font-semibold text-on-dark transition-colors hover:bg-on-dark/10"
             >
               <InstagramLogo size={18} weight="bold" />
               Instagram
@@ -113,7 +113,7 @@ export function Hero() {
           animate="show"
           className="relative hidden lg:block"
         >
-          <div className="relative aspect-[4/5] overflow-hidden rounded-img ring-1 ring-on-green/15">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-img ring-1 ring-on-dark/15">
             <Image
               src="/fotos/frappes.jpg"
               alt="Frappés de la casa con crema y chocolate en Emilia Bonita"
@@ -123,7 +123,7 @@ export function Hero() {
               className="object-cover"
             />
             {/* Degradado abajo para legibilidad de la nota */}
-            <div className="absolute inset-0 bg-gradient-to-t from-green-deep/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-bean/80 via-transparent to-transparent" />
 
             {/* Nota manuscrita tipo libreta, dentro de la foto (no se corta) */}
             <span className="hand absolute bottom-5 left-6 -rotate-3 text-3xl text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">

@@ -1,0 +1,47 @@
+/* ============================================================
+   Carta imprimible (tamaño carta). Conserva los colores de marca
+   al imprimir y reparte las categorías en dos columnas.
+   ============================================================ */
+
+.carta-cols {
+  column-count: 2;
+  column-gap: 1.4rem;
+  orphans: 3;
+  widows: 3;
+}
+
+.carta-cat {
+  break-inside: avoid;
+  margin-bottom: 0.85rem;
+}
+
+/* Forzar la impresión de fondos verde/crema del diseño */
+.carta-sheet,
+.carta-sheet * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .carta-stage {
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  .carta-sheet {
+    width: 8.5in !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+}

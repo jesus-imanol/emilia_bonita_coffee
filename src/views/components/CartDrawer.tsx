@@ -68,7 +68,7 @@ export function CartDrawer() {
           <a
             href="#menu"
             onClick={closeDrawer}
-            className="pressable mt-6 inline-flex items-center rounded-pill bg-green px-5 py-3 text-sm font-semibold text-on-green hover:bg-green-deep"
+            className="pressable mt-6 inline-flex items-center rounded-pill bg-green px-5 py-3 text-sm font-semibold text-on-dark hover:bg-bean"
           >
             Ver la carta
           </a>
@@ -161,7 +161,7 @@ export function CartDrawer() {
 
             <div className="flex items-center justify-between pt-1">
               <span className="text-base font-medium text-ink">Subtotal</span>
-              <span className="font-display text-xl font-bold tabular-nums text-green-deep">
+              <span className="font-display text-xl font-bold tabular-nums text-bean">
                 {formatMXN(subtotal)}
               </span>
             </div>
@@ -171,7 +171,7 @@ export function CartDrawer() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeDrawer}
-              className="pressable flex w-full items-center justify-center gap-2 rounded-pill bg-green px-5 py-3.5 text-base font-semibold text-on-green transition-colors hover:bg-green-deep"
+              className="pressable flex w-full items-center justify-center gap-2 rounded-pill bg-green px-5 py-3.5 text-base font-semibold text-on-dark transition-colors hover:bg-bean"
             >
               <WhatsappLogo size={20} weight="bold" />
               Enviar pedido por WhatsApp

@@ -44,7 +44,7 @@ export function LogoSlot({
     tone === "light"
       ? "/logo-emilia-bonita.png"
       : "/logo-emilia-bonita-green.png";
-  const wordColor = tone === "light" ? "text-on-green" : "text-green-deep";
+  const wordColor = tone === "light" ? "text-on-dark" : "text-bean";
 
   return (
     <span className={`inline-flex items-center gap-3 ${className}`}>

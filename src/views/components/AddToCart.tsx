@@ -33,7 +33,7 @@ export function AddToCart({
         <button
           type="button"
           onClick={() => setSheetOpen(true)}
-          className="pressable mt-auto inline-flex w-full items-center justify-center gap-2 rounded-pill bg-green px-4 py-2.5 pt-2.5 text-sm font-semibold text-on-green transition-colors hover:bg-green-deep"
+          className="pressable mt-auto inline-flex w-full items-center justify-center gap-2 rounded-pill bg-green px-4 py-2.5 pt-2.5 text-sm font-semibold text-on-dark transition-colors hover:bg-bean"
         >
           <Plus size={16} weight="bold" />
           Elegir y agregar
@@ -76,7 +76,7 @@ export function AddToCart({
           qty: 1,
         })
       }
-      className="pressable mt-auto inline-flex w-full items-center justify-center gap-2 rounded-pill bg-green px-4 py-2.5 text-sm font-semibold text-on-green transition-colors hover:bg-green-deep"
+      className="pressable mt-auto inline-flex w-full items-center justify-center gap-2 rounded-pill bg-green px-4 py-2.5 text-sm font-semibold text-on-dark transition-colors hover:bg-bean"
     >
       <Plus size={16} weight="bold" />
       Agregar

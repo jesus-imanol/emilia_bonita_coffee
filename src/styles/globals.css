@@ -21,14 +21,14 @@
 @theme inline {
   --color-cream: var(--cream);
   --color-cream-deep: var(--cream-deep);
-  --color-green-deep: var(--green-deep);
+  --color-bean: var(--bean);
   --color-green: var(--green);
   --color-green-soft: var(--green-soft);
   --color-espresso: var(--espresso);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
-  --color-on-green: var(--on-green);
-  --color-on-green-dim: var(--on-green-dim);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-dim: var(--on-dark-dim);
   --color-latte: var(--latte);
   --color-terracotta: var(--terracotta);
 
@@ -76,7 +76,7 @@ p {
 
 ::selection {
   background-color: var(--green);
-  color: var(--on-green);
+  color: var(--on-dark);
 }
 
 :focus-visible {

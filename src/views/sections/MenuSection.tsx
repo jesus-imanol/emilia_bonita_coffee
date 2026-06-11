@@ -39,7 +39,7 @@ export function MenuSection() {
         <div className="pt-20 sm:pt-28">
           <p className="hand text-3xl text-green-soft">de nuestra libreta</p>
           <div className="mt-1 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
-            <h2 className="font-display text-4xl font-bold tracking-tight text-green-deep sm:text-5xl">
+            <h2 className="font-display text-4xl font-bold tracking-tight text-bean sm:text-5xl">
               La carta
             </h2>
             <p className="pb-1 text-sm font-medium text-ink-soft">
@@ -74,7 +74,7 @@ function CategoryBlock({ cat }: { cat: MenuCategory }) {
   return (
     <div id={categoryAnchorId(cat.id)} className="anchor-menu pt-14 first:pt-10">
       <header className="mb-6">
-        <h3 className="font-display text-2xl font-semibold tracking-tight text-green-deep sm:text-3xl">
+        <h3 className="font-display text-2xl font-semibold tracking-tight text-bean sm:text-3xl">
           {cat.name}
         </h3>
         {cat.tagline && (

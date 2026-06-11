@@ -60,7 +60,7 @@ export function CategoryTabs({ items, active, onSelect }: CategoryTabsProps) {
               aria-selected={isActive}
               onClick={() => handleClick(it.id)}
               className={`pressable relative shrink-0 whitespace-nowrap rounded-pill px-4 py-2 text-sm font-semibold transition-colors ${
-                isActive ? "text-on-green" : "text-ink-soft hover:text-ink"
+                isActive ? "text-on-dark" : "text-ink-soft hover:text-ink"
               }`}
             >
               {isActive && (

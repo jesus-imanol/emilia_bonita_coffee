@@ -18,8 +18,8 @@ export function CartButton({ tone }: { tone: "light" | "dark" }) {
 
   const badge =
     tone === "light"
-      ? "bg-cream text-green-deep"
-      : "bg-green text-on-green";
+      ? "bg-cream text-bean"
+      : "bg-green text-on-dark";
 
   return (
     <button

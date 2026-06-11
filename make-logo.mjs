@@ -42,7 +42,7 @@ const rounded = Buffer.from(
   `<svg width="${SIZE}" height="${SIZE}"><rect width="${SIZE}" height="${SIZE}" rx="56" ry="56"/></svg>`
 );
 await sharp({
-  create: { width: SIZE, height: SIZE, channels: 4, background: { r: 30, g: 56, b: 42, alpha: 1 } },
+  create: { width: SIZE, height: SIZE, channels: 4, background: { r: 36, g: 23, b: 18, alpha: 1 } },
 })
   .composite([
     { input: emblem, gravity: "center" },

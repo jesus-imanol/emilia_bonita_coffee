@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstagramLogo, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { BUSINESS } from "@/models/business.data";
 import { LogoSlot } from "@/views/components/LogoSlot";
@@ -7,14 +8,14 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-green-deep text-on-green">
+    <footer className="bg-bean text-on-dark">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <Reveal>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1.2fr]">
             {/* Marca */}
             <div>
               <LogoSlot variant="footer" tone="light" />
-              <p className="mt-5 max-w-xs leading-relaxed text-on-green-dim">
+              <p className="mt-5 max-w-xs leading-relaxed text-on-dark-dim">
                 {BUSINESS.tagline}
               </p>
               <p className="hand mt-4 text-2xl text-latte">
@@ -24,36 +25,44 @@ export function Footer() {
 
             {/* Enlaces */}
             <nav aria-label="Pie de página">
-              <p className="text-sm font-semibold text-on-green-dim">Explora</p>
+              <p className="text-sm font-semibold text-on-dark-dim">Explora</p>
               <ul className="mt-4 space-y-2.5">
                 {BUSINESS.nav.map((link) => (
                   <li key={link.id}>
                     <a
                       href={`#${link.id}`}
-                      className="text-base text-on-green transition-opacity hover:opacity-70"
+                      className="text-base text-on-dark transition-opacity hover:opacity-70"
                     >
                       {link.label}
                     </a>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/carta"
+                    className="text-base text-on-dark transition-opacity hover:opacity-70"
+                  >
+                    Carta para imprimir
+                  </Link>
+                </li>
               </ul>
             </nav>
 
             {/* Visítanos */}
             <div>
-              <p className="text-sm font-semibold text-on-green-dim">Visítanos</p>
-              <address className="mt-4 not-italic leading-relaxed text-on-green">
+              <p className="text-sm font-semibold text-on-dark-dim">Visítanos</p>
+              <address className="mt-4 not-italic leading-relaxed text-on-dark">
                 {BUSINESS.addressParts.street}
                 <br />
                 {BUSINESS.addressParts.postalCode} {BUSINESS.city},{" "}
                 {BUSINESS.state}
               </address>
-              <p className="mt-3 text-sm text-on-green-dim">
+              <p className="mt-3 text-sm text-on-dark-dim">
                 {BUSINESS.hours.map((h) => `${h.days}: ${h.time}`).join(". ")}
               </p>
               <a
                 href={`tel:${BUSINESS.phone.tel}`}
-                className="mt-2 inline-block text-on-green transition-opacity hover:opacity-70"
+                className="mt-2 inline-block text-on-dark transition-opacity hover:opacity-70"
               >
                 {BUSINESS.phone.display}
               </a>
@@ -63,7 +72,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="pressable inline-flex h-11 w-11 items-center justify-center rounded-pill border border-on-green/30 text-on-green transition-colors hover:bg-on-green/10"
+                  className="pressable inline-flex h-11 w-11 items-center justify-center rounded-pill border border-on-dark/30 text-on-dark transition-colors hover:bg-on-dark/10"
                 >
                   <InstagramLogo size={20} weight="bold" />
                 </a>
@@ -72,7 +81,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="pressable inline-flex h-11 w-11 items-center justify-center rounded-pill border border-on-green/30 text-on-green transition-colors hover:bg-on-green/10"
+                  className="pressable inline-flex h-11 w-11 items-center justify-center rounded-pill border border-on-dark/30 text-on-dark transition-colors hover:bg-on-dark/10"
                 >
                   <WhatsappLogo size={20} weight="bold" />
                 </a>
@@ -82,7 +91,7 @@ export function Footer() {
         </Reveal>
 
         {/* Línea inferior */}
-        <div className="mt-14 flex flex-col gap-3 border-t border-on-green/15 pt-6 text-sm text-on-green-dim sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-on-dark/15 pt-6 text-sm text-on-dark-dim sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {BUSINESS.name}. Todos los derechos reservados.
           </p>

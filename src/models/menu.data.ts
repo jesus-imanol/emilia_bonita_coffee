@@ -103,8 +103,9 @@ export const MENU: MenuCategory[] = [
     items: [
       {
         id: "snack-alitas",
-        name: "Alitas BBQ",
+        name: "Alitas",
         note: "8 pzas",
+        options: ["BBQ", "Mango habanero"],
         price: 110,
       },
       {

@@ -42,7 +42,7 @@ export function ScrollToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className={`pressable fixed right-5 inline-flex h-12 w-12 items-center justify-center rounded-pill bg-green-deep text-on-green shadow-[var(--shadow-lift)] ring-1 ring-on-green/20 transition-colors hover:bg-green ${
+          className={`pressable fixed right-5 inline-flex h-12 w-12 items-center justify-center rounded-pill bg-bean text-on-dark shadow-[var(--shadow-lift)] ring-1 ring-on-dark/20 transition-colors hover:bg-green ${
             cartBarVisible ? "bottom-24 lg:bottom-6" : "bottom-6"
           }`}
           style={{ zIndex: "var(--z-sticky)" }}

@@ -35,7 +35,7 @@ export function CartStickyBar() {
           <button
             type="button"
             onClick={openDrawer}
-            className="pressable flex w-full items-center justify-between gap-3 rounded-pill bg-green px-5 py-3.5 text-on-green shadow-[var(--shadow-lift)]"
+            className="pressable flex w-full items-center justify-between gap-3 rounded-pill bg-green px-5 py-3.5 text-on-dark shadow-[var(--shadow-lift)]"
           >
             <span className="inline-flex items-center gap-2 font-semibold">
               <ShoppingBagOpen size={20} weight="bold" />

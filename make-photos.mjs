@@ -49,6 +49,25 @@ const jobs = [
     brightness: 1.05,
     saturation: 1.05,
   },
+  // Fotos del local (fachada + mural representativo).
+  {
+    in: "public/fachada_angulo_45_grados_calle.jpeg",
+    out: "public/fotos/fachada.jpg",
+    brightness: 1.1,
+    saturation: 1.05,
+  },
+  {
+    in: "public/pared_representativa_emilia.jpeg",
+    out: "public/fotos/mural.jpg",
+    brightness: 1.05,
+    saturation: 1.06,
+  },
+  {
+    in: "public/pared_representativa_emilia_2.jpeg",
+    out: "public/fotos/mural-2.jpg",
+    brightness: 1.05,
+    saturation: 1.06,
+  },
 ];
 
 for (const j of jobs) {

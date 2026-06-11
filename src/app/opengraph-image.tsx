@@ -11,7 +11,7 @@ const logoSrc = `data:image/png;base64,${readFileSync(
   join(process.cwd(), "public/logo-emilia-bonita.png")
 ).toString("base64")}`;
 
-// Imagen Open Graph generada en marca (verde de bosque + crema).
+// Imagen Open Graph generada en marca (café espresso + crema).
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -22,8 +22,8 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#1e382a",
-          color: "#f4efe3",
+          background: "#241712",
+          color: "#efe6d6",
           padding: 80,
           fontFamily: "sans-serif",
         }}
@@ -31,7 +31,7 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logoSrc} width={101} height={120} alt="" />
-          <div style={{ fontSize: 30, color: "#bfd0be" }}>Huixtla, Chiapas</div>
+          <div style={{ fontSize: 30, color: "#c8b6a0" }}>Huixtla, Chiapas</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -51,7 +51,7 @@ export default function OpengraphImage() {
           </div>
         </div>
 
-        <div style={{ fontSize: 34, color: "#bfd0be", maxWidth: 920 }}>
+        <div style={{ fontSize: 34, color: "#c8b6a0", maxWidth: 920 }}>
           Café de origen y antojos hechos a mano.
         </div>
       </div>

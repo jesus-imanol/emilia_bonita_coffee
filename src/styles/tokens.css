@@ -1,35 +1,36 @@
 /* ============================================================
    Emilia Bonita : Design Tokens
    Cafetería artesanal · Huixtla, Chiapas
-   Concepto: "Café de origen, hecho a mano." Verde de bosque
-   como color protagonista (es el color del logo), crema como
-   página de libreta legible, espresso para profundidad.
-   Todos los valores de texto verificados a contraste WCAG AA.
+   Concepto: "Tueste oscuro." El CAFÉ espresso domina las
+   superficies; la crema avena da la lectura; el verde del logo
+   queda como acento único. Nota: los nombres de token son roles;
+   el dominante oscuro es café (`--bean`), aunque histórico.
+   Contraste de texto verificado a WCAG AA.
    ============================================================ */
 
 :root {
   /* ---- Color: superficies ---- */
-  --cream: #f4efe3;        /* off-white cálido, ligeramente tintado al verde, no beige genérico */
-  --cream-deep: #ece4d4;   /* superficie alterna sutil (hover, separaciones) */
-  --green-deep: #1e382a;   /* fondo del hero y footer: aquí brilla el logo blanco */
-  --green: #355c42;        /* ACENTO ÚNICO: botones, enlaces, detalles */
-  --green-soft: #5c7e63;   /* verde claro decorativo sobre crema */
-  --espresso: #281c14;     /* banda "Sobre nosotros", profundidad */
+  --cream: #efe6d6;        /* crema avena para lectura, no el beige genérico prohibido */
+  --cream-deep: #e3d6c1;   /* superficie alterna sutil (hover, separaciones) */
+  --bean: #241712;         /* CAFÉ espresso: superficie dominante (hero, footer, bandas) */
+  --green: #3e6b4f;        /* ACENTO ÚNICO (verde del logo): botones, enlaces, precios */
+  --green-soft: #5f8268;   /* verde suave decorativo (kickers manuscritos) */
+  --espresso: #3a261a;     /* café medio: banda "Sobre nosotros" */
 
   /* ---- Color: tinta / texto ---- */
-  --ink: #1f211c;          /* cuerpo sobre crema  (≈14:1) */
-  --ink-soft: #4b4a41;     /* texto secundario sobre crema (≈6.8:1) */
-  --on-green: #f4efe3;     /* texto sobre verde/espresso (≈11:1) */
-  --on-green-dim: #bfd0be; /* texto secundario sobre verde (≈7.3:1) */
+  --ink: #241712;          /* cuerpo sobre crema (≈12:1) */
+  --ink-soft: #5a4636;     /* texto secundario sobre crema (≈6.8:1) */
+  --on-dark: #efe6d6;      /* texto sobre café (≈12:1) */
+  --on-dark-dim: #c8b6a0;  /* texto secundario sobre café (≈7.5:1) */
 
   /* ---- Color: tierra (decorativo, muy puntual) ---- */
   --latte: #c9a77c;
   --terracotta: #b45b3c;
 
   /* ---- Líneas ---- */
-  --line: rgba(31, 33, 28, 0.12);
-  --line-strong: rgba(31, 33, 28, 0.22);
-  --line-on-green: rgba(244, 239, 227, 0.16);
+  --line: rgba(36, 23, 18, 0.12);
+  --line-strong: rgba(36, 23, 18, 0.22);
+  --line-on-dark: rgba(239, 230, 214, 0.16);
 
   /* ---- Radios (sistema por rol, documentado) ----
      pill -> botones y chips · card -> tarjetas · img -> fotos · input -> campos */
