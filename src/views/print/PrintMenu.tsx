@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { BUSINESS } from "@/models/business.data";
-import { MENU } from "@/models/menu.data";
-import { formatMXN, type MenuItem, type OptionGroup } from "@/models/menu.types";
+import {
+  formatMXN,
+  type MenuCategory,
+  type MenuItem,
+  type OptionGroup,
+} from "@/models/menu.types";
 
 function PrintItem({ item }: { item: MenuItem }) {
   const hasVariants = Boolean(item.variants?.length);
@@ -69,7 +73,7 @@ function CategoryOptions({ groups }: { groups: OptionGroup[] }) {
   );
 }
 
-export function PrintMenu() {
+export function PrintMenu({ menu }: { menu: MenuCategory[] }) {
   return (
     <div className="carta-sheet flex w-[8.5in] min-h-[11in] flex-col rounded-[6px] bg-cream p-[0.5in] shadow-[var(--shadow-lift)]">
       {/* Encabezado */}
@@ -99,7 +103,7 @@ export function PrintMenu() {
 
       {/* Categorías en dos columnas */}
       <div className="carta-cols mt-5">
-        {MENU.map((cat) => (
+        {menu.map((cat) => (
           <section key={cat.id} className="carta-cat">
             <h2 className="border-b border-green/30 pb-1 font-display text-[15px] font-bold tracking-tight text-bean">
               {cat.name}

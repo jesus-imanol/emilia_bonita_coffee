@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import "@/styles/print.css";
+import { getMenu } from "@/models/menu.repo";
 import { PrintMenu } from "@/views/print/PrintMenu";
 import { PrintButton } from "@/views/print/PrintButton";
 
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function CartaImprimiblePage() {
+export default async function CartaImprimiblePage() {
+  const menu = await getMenu();
+
   return (
     <div className="carta-stage min-h-dvh bg-espresso px-4 py-8 sm:py-10">
       {/* Controles (no se imprimen) */}
@@ -37,7 +40,7 @@ export default function CartaImprimiblePage() {
 
       {/* Hoja tamaño carta (con scroll horizontal en pantallas chicas) */}
       <div className="mx-auto w-fit max-w-full overflow-x-auto">
-        <PrintMenu />
+        <PrintMenu menu={menu} />
       </div>
     </div>
   );

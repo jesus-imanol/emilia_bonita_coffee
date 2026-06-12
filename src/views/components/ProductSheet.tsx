@@ -2,6 +2,7 @@
 
 import { Check, X } from "@phosphor-icons/react";
 import { formatMXN, type MenuCategory, type MenuItem } from "@/models/menu.types";
+import type { CartLine } from "@/models/cart.types";
 import { useCart } from "@/viewmodels/useCart";
 import { useProductDraft } from "@/viewmodels/useProductDraft";
 import { ModalShell } from "./ModalShell";
@@ -12,6 +13,13 @@ interface ProductSheetProps {
   category: MenuCategory;
   open: boolean;
   onClose: () => void;
+  /**
+   * Handler de "agregar". Por defecto escribe en el carrito público
+   * (useCart). El panel POS pasa su propio handler (draft del pedido).
+   */
+  onAdd?: (line: Omit<CartLine, "lineId">) => void;
+  /** Texto del botón de acción (por defecto "Agregar"). */
+  addLabel?: string;
 }
 
 function Chip({
@@ -47,8 +55,16 @@ function Chip({
   );
 }
 
-export function ProductSheet({ item, category, open, onClose }: ProductSheetProps) {
-  const addLine = useCart((s) => s.addLine);
+export function ProductSheet({
+  item,
+  category,
+  open,
+  onClose,
+  onAdd,
+  addLabel = "Agregar",
+}: ProductSheetProps) {
+  const addToCart = useCart((s) => s.addLine);
+  const addLine = onAdd ?? addToCart;
   const {
     spec,
     draft,
@@ -152,16 +168,18 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
           <section>
             <div className="flex items-baseline justify-between">
               <h4 className="font-display text-base font-semibold text-bean">
-                Elige tus ingredientes
+                Elige tus {spec.pickNoun}
               </h4>
               <span className="text-sm font-medium tabular-nums text-ink-soft">
                 {draft.ingredients.length} / {spec.ingredientCount}
               </span>
             </div>
             <div className="mt-3 space-y-3">
-              {spec.ingredientGroups.map((group) => (
-                <div key={group.label}>
-                  <p className="hand text-xl text-green-soft">{group.label}</p>
+              {spec.ingredientGroups.map((group, gi) => (
+                <div key={group.label || gi}>
+                  {group.label && (
+                    <p className="hand text-xl text-green-soft">{group.label}</p>
+                  )}
                   <div className="mt-1.5 flex flex-wrap gap-2">
                     {group.options.map((opt) => (
                       <Chip
@@ -236,7 +254,7 @@ export function ProductSheet({ item, category, open, onClose }: ProductSheetProp
           disabled={!complete}
           className="pressable flex flex-1 items-center justify-center gap-2 rounded-pill bg-green px-5 py-3 text-base font-semibold text-on-dark transition-colors hover:bg-bean disabled:cursor-not-allowed disabled:opacity-40"
         >
-          Agregar
+          {addLabel}
           <span className="tabular-nums">{formatMXN(unitPrice * draft.qty)}</span>
         </button>
       </div>

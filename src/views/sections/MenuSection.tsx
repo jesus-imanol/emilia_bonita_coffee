@@ -9,14 +9,14 @@ import { CategoryTabs, categoryAnchorId } from "@/views/components/CategoryTabs"
 import { MenuCard } from "@/views/components/MenuCard";
 import type { CategoryId, MenuCategory } from "@/models/menu.types";
 
-export function MenuSection() {
+export function MenuSection({ menu }: { menu: MenuCategory[] }) {
   const {
     categories,
     categoryNav,
     activeCategory,
     selectCategory,
     syncActiveFromScroll,
-  } = useMenu();
+  } = useMenu(menu);
 
   const anchorIds = useMemo(
     () => categories.map((c) => categoryAnchorId(c.id)),

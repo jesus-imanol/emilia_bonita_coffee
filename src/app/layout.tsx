@@ -75,6 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
+      data-scroll-behavior="smooth"
       className={`${bricolage.variable} ${hanken.variable} ${caveat.variable}`}
     >
       <body className="min-h-dvh">

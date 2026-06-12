@@ -19,6 +19,8 @@ export interface SelectionSpec {
   needsIngredients: boolean;
   ingredientCount: number;
   ingredientGroups: OptionGroup[];
+  /** Sustantivo para el encabezado: "ingredientes" (crepa) o "sabores". */
+  pickNoun: string;
   addOn?: ExtraAddOn;
   /** Precio base (sin tamaño ni extra). */
   basePrice: number;
@@ -43,11 +45,26 @@ export function resolveSelectionSpec(
   item: MenuItem,
   category: MenuCategory
 ): SelectionSpec {
-  const needsIngredients = category.id === "crepas" && Boolean(item.picks);
+  // Mecánica "arma el tuyo": elige N de los grupos de la categoría (crepas).
+  const usesCategoryGroups =
+    Boolean(category.optionGroups?.length) && Boolean(item.picks);
+  // Producto que pide elegir N de su propia lista de opciones (ej. 2 sabores).
+  const usesItemPicks =
+    !usesCategoryGroups &&
+    (item.picks ?? 0) >= 2 &&
+    Boolean(item.options?.length);
+
+  const needsIngredients = usesCategoryGroups || usesItemPicks;
   const needsSize = Boolean(item.variants?.length);
   const needsFlavor = !needsIngredients && Boolean(item.options?.length);
   const addOn = item.extra;
   const hasChoices = needsFlavor || needsSize || needsIngredients || Boolean(addOn);
+
+  const ingredientGroups = usesCategoryGroups
+    ? category.optionGroups ?? []
+    : usesItemPicks
+      ? [{ label: "", options: item.options! }]
+      : [];
 
   return {
     needsFlavor,
@@ -56,7 +73,8 @@ export function resolveSelectionSpec(
     sizeOptions: needsSize ? item.variants! : [],
     needsIngredients,
     ingredientCount: item.picks ?? 0,
-    ingredientGroups: needsIngredients ? category.optionGroups ?? [] : [],
+    ingredientGroups,
+    pickNoun: usesItemPicks ? "sabores" : "ingredientes",
     addOn,
     basePrice: item.price ?? 0,
     hasChoices,

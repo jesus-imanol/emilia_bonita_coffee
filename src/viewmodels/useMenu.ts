@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { MENU } from "@/models/menu.data";
 import type { CategoryId, MenuCategory } from "@/models/menu.types";
 
 export interface CategoryNavItem {
@@ -24,8 +23,11 @@ export interface UseMenu {
  * VIEWMODEL · Estado y acciones del menú: agrupa categorías,
  * expone la navegación y la categoría seleccionada.
  */
-export function useMenu(initial?: CategoryId): UseMenu {
-  const categories = MENU;
+export function useMenu(
+  menu: MenuCategory[],
+  initial?: CategoryId
+): UseMenu {
+  const categories = menu;
   const [activeCategory, setActiveCategory] = useState<CategoryId>(
     initial ?? categories[0].id
   );

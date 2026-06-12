@@ -1,4 +1,5 @@
 import { BUSINESS } from "@/models/business.data";
+import { getMenu } from "@/models/menu.repo";
 import { Navbar } from "@/views/components/Navbar";
 import { GrainOverlay } from "@/views/components/GrainOverlay";
 import { CartDrawer } from "@/views/components/CartDrawer";
@@ -59,7 +60,9 @@ const jsonLd = {
  * Página única (one-page). Solo compone las vistas; toda la lógica
  * vive en los viewmodels y los datos en los models (MVVM).
  */
-export default function Home() {
+export default async function Home() {
+  const menu = await getMenu();
+
   return (
     <>
       <script
@@ -70,7 +73,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Antojos />
-      <MenuSection />
+      <MenuSection menu={menu} />
       <About />
       <Location />
       <Footer />
