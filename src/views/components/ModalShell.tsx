@@ -50,15 +50,25 @@ export function ModalShell({
 
   useScrollLock(open);
 
+  const focusables = () =>
+    panelRef.current
+      ? Array.from(panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE))
+      : [];
+
+  // Foco inicial SOLO cuando se abre (no en cada render: si no, robaría el
+  // foco al teclear y solo dejaría escribir un carácter en los inputs).
   useEffect(() => {
     if (!open) return;
     restoreRef.current = document.activeElement as HTMLElement | null;
-    const focusables = () =>
-      panelRef.current
-        ? Array.from(panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE))
-        : [];
     focusables()[0]?.focus();
+    return () => {
+      restoreRef.current?.focus?.();
+    };
+  }, [open]);
 
+  // Esc para cerrar + trampa de foco con Tab.
+  useEffect(() => {
+    if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
@@ -80,10 +90,7 @@ export function ModalShell({
       }
     };
     document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      restoreRef.current?.focus?.();
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
   const panelMotion =

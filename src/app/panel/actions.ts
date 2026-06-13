@@ -76,20 +76,29 @@ export interface SaveMenuItemInput {
   price: number | null;
   description: string | null;
   active: boolean;
+  /** Campos avanzados: solo se actualizan si vienen definidos. */
+  variants?: PriceVariant[] | null;
+  options?: string[] | null;
+  picks?: number | null;
+  extra?: ExtraAddOn | null;
 }
 
-/** Edita un producto (precio, nombre, descripción, disponibilidad). */
+/** Edita un producto. Nombre/precio/disponibilidad siempre; lo avanzado si viene. */
 export async function saveMenuItem(id: string, fields: SaveMenuItemInput) {
   const supabase = await requireAdmin();
-  const { error } = await supabase
-    .from("menu_items")
-    .update({
-      name: fields.name,
-      price: fields.price,
-      description: fields.description,
-      active: fields.active,
-    })
-    .eq("id", id);
+
+  const update: Record<string, unknown> = {
+    name: fields.name,
+    price: fields.price,
+    description: fields.description,
+    active: fields.active,
+  };
+  if (fields.variants !== undefined) update.variants = fields.variants;
+  if (fields.options !== undefined) update.options = fields.options;
+  if (fields.picks !== undefined) update.picks = fields.picks;
+  if (fields.extra !== undefined) update.extra = fields.extra;
+
+  const { error } = await supabase.from("menu_items").update(update).eq("id", id);
   if (error) throw new Error(error.message);
   revalidateTag(MENU_TAG, { expire: 0 });
 }
