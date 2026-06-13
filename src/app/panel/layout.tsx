@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NavProgress } from "@/views/panel/NavProgress";
 
 export const metadata: Metadata = {
   title: "Panel · Emilia Bonita",
@@ -11,5 +12,10 @@ export default function PanelLayout({
   children: React.ReactNode;
 }) {
   // Shell sobrio del panel (sin chrome de marketing). Una sola sans vía .panel-root.
-  return <div className="panel-root min-h-dvh bg-cream text-ink">{children}</div>;
+  return (
+    <div className="panel-root min-h-dvh bg-cream text-ink">
+      <NavProgress />
+      {children}
+    </div>
+  );
 }

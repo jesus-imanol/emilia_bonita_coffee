@@ -18,20 +18,22 @@ const HEARTS = Array.from({ length: 16 }, (_, i) => ({
   color: HEART_COLORS[i % HEART_COLORS.length],
 }));
 
-const LINES = [
-  "Te amo muchísimo.",
-  "Gracias por hacerme tan feliz.",
-  "Ya quiero verte. 🤍",
-];
-
 /**
- * VIEW · Bienvenida especial para una mesera: sale sola la primera vez y se
- * puede reabrir con el botón de corazón. Snoopy + corazones + mensaje.
- * Respeta reduced-motion.
+ * VIEW · Bienvenida diaria para una mesera: sale sola una vez al día con el
+ * mensaje del día y se puede reabrir con el botón de corazón.
+ * Snoopy + corazones + mensaje. Respeta reduced-motion.
  */
-export function WelcomeOverlay({ userId }: { userId: string }) {
+export function WelcomeOverlay({
+  userId,
+  dateKey,
+  message,
+}: {
+  userId: string;
+  dateKey: string;
+  message: string;
+}) {
   const reduce = useReducedMotion();
-  const store = getWelcomeStore(userId);
+  const store = getWelcomeStore(userId, dateKey);
   const state = useSyncExternalStore(
     store.subscribe,
     store.getSnapshot,
@@ -96,28 +98,23 @@ export function WelcomeOverlay({ userId }: { userId: string }) {
             />
           </motion.div>
 
-          <motion.h1
-            className="hand mt-7 text-4xl text-terracotta sm:text-5xl"
-            initial={{ opacity: 0, y: 14 }}
+          <motion.p
+            className="hand mt-7 text-2xl text-terracotta"
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: reduce ? 0.1 : 0.35 }}
           >
-            Bienvenida a tu trabajo, mi amor 💖
-          </motion.h1>
+            Para ti, mi amor 💖
+          </motion.p>
 
-          <div className="mt-4 space-y-1.5">
-            {LINES.map((l, i) => (
-              <motion.p
-                key={l}
-                className="text-lg font-medium text-ink"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: reduce ? 0.1 : 0.6 + i * 0.18 }}
-              >
-                {l}
-              </motion.p>
-            ))}
-          </div>
+          <motion.p
+            className="mx-auto mt-3 max-w-md text-balance text-xl font-semibold leading-snug text-ink sm:text-2xl"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: reduce ? 0.1 : 0.55 }}
+          >
+            {message}
+          </motion.p>
 
           <motion.button
             type="button"

@@ -5,6 +5,7 @@ import { Plus, SlidersHorizontal } from "@phosphor-icons/react";
 import { formatMXN, type MenuCategory, type MenuItem } from "@/models/menu.types";
 import { resolveSelectionSpec } from "@/models/menu.selection";
 import { useOrderDraft } from "@/viewmodels/useOrderDraft";
+import { useOrderToast } from "@/viewmodels/useOrderToast";
 import { ProductSheet } from "@/views/components/ProductSheet";
 
 export function OrderItemPicker({
@@ -16,6 +17,7 @@ export function OrderItemPicker({
 }) {
   const spec = resolveSelectionSpec(item, category);
   const addLine = useOrderDraft((s) => s.addLine);
+  const notify = useOrderToast((s) => s.notify);
   const [open, setOpen] = useState(false);
 
   const priceLabel = item.variants?.length
@@ -44,22 +46,26 @@ export function OrderItemPicker({
             category={category}
             open={open}
             onClose={() => setOpen(false)}
-            onAdd={addLine}
+            onAdd={(line) => {
+              addLine(line);
+              notify(line.name);
+            }}
             addLabel="Agregar al pedido"
           />
         </>
       ) : (
         <button
           type="button"
-          onClick={() =>
+          onClick={() => {
             addLine({
               itemId: item.id,
               categoryId: category.id,
               name: item.name,
               unitPrice: item.price ?? 0,
               qty: 1,
-            })
-          }
+            });
+            notify(item.name);
+          }}
           className="pressable inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-green px-3.5 py-2 text-sm font-semibold text-on-dark transition-colors hover:bg-bean"
         >
           <Plus size={15} weight="bold" />

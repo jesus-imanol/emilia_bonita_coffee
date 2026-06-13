@@ -3,9 +3,15 @@
 import { Heart } from "@phosphor-icons/react";
 import { getWelcomeStore } from "@/viewmodels/welcomeStore";
 
-/** Botón (solo para la mesera del mensaje) que reabre la bienvenida cuando quiera. */
-export function WelcomeReplayButton({ userId }: { userId: string }) {
-  const store = getWelcomeStore(userId);
+/** Botón (solo para la mesera del mensaje) que reabre el mensaje del día. */
+export function WelcomeReplayButton({
+  userId,
+  dateKey,
+}: {
+  userId: string;
+  dateKey: string;
+}) {
+  const store = getWelcomeStore(userId, dateKey);
   return (
     <button
       type="button"

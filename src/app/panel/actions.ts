@@ -9,6 +9,7 @@ import type { CartLine } from "@/models/cart.types";
 import type { PaymentMethod } from "@/models/order.types";
 import type { PriceVariant, ExtraAddOn } from "@/models/menu.types";
 import { cartLineToInsert } from "@/models/orderItem.map";
+import { isMessagesAdmin } from "@/models/special";
 
 /** Verifica que quien llama sea admin y devuelve el client (RLS aplica). */
 async function requireAdmin() {
@@ -377,5 +378,69 @@ export async function createMesera(input: CreateMeseraInput) {
     email_confirm: true,
     user_metadata: { role: "mesera", full_name: fullName },
   });
+  if (error) throw new Error(error.message);
+}
+
+/* ============================================================
+   Mensajes diarios (privados · solo el correo configurado)
+   ============================================================ */
+
+/**
+ * Verifica que quien llama sea el dueño de los mensajes (por correo) y
+ * devuelve el client service-role: así NO necesita ser admin de la app.
+ */
+async function requireMessagesAdmin() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user || !isMessagesAdmin(user.email ?? null)) {
+    throw new Error("No autorizado.");
+  }
+  return createAdminClient();
+}
+
+export async function createMessage(body: string) {
+  const supabase = await requireMessagesAdmin();
+  const text = body.trim();
+  if (!text) throw new Error("Escribe el mensaje.");
+
+  const { data: last } = await supabase
+    .from("love_messages")
+    .select("sort_order")
+    .order("sort_order", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  const sort_order = (last?.sort_order ?? -1) + 1;
+
+  const { error } = await supabase
+    .from("love_messages")
+    .insert({ body: text, sort_order, active: true });
+  if (error) throw new Error(error.message);
+}
+
+export async function updateMessage(id: string, body: string) {
+  const supabase = await requireMessagesAdmin();
+  const text = body.trim();
+  if (!text) throw new Error("El mensaje no puede quedar vacío.");
+  const { error } = await supabase
+    .from("love_messages")
+    .update({ body: text })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export async function setMessageActive(id: string, active: boolean) {
+  const supabase = await requireMessagesAdmin();
+  const { error } = await supabase
+    .from("love_messages")
+    .update({ active })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export async function deleteMessage(id: string) {
+  const supabase = await requireMessagesAdmin();
+  const { error } = await supabase.from("love_messages").delete().eq("id", id);
   if (error) throw new Error(error.message);
 }

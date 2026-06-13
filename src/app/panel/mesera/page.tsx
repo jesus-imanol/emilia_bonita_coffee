@@ -9,14 +9,11 @@ import {
   startOfTodayMX,
   type OrderStatus,
 } from "@/models/order.types";
+import { DEFAULT_LOVE_MESSAGE, isOdalis } from "@/models/special";
 import { SignOutButton } from "@/views/panel/SignOutButton";
 import { StatusBadge } from "@/views/panel/StatusBadge";
 import { WelcomeOverlay } from "@/views/panel/WelcomeOverlay";
 import { WelcomeReplayButton } from "@/views/panel/WelcomeReplayButton";
-
-// Bienvenida especial (una sola vez) para una mesera en particular.
-const SPECIAL_EMAIL = "ortizodaliz13@gmail.com";
-const SPECIAL_NAMES = ["odalis", "ortiz", "odalis ortiz", "oda"];
 
 interface OrderListRow {
   id: string;
@@ -82,12 +79,24 @@ export default async function MeseraHome({
     .eq("id", user.id)
     .single();
 
-  const email = (user.email ?? "").toLowerCase();
-  const fname = (profile?.full_name ?? "").trim().toLowerCase();
-  const isSpecialMesera =
-    email === SPECIAL_EMAIL || SPECIAL_NAMES.includes(fname);
+  const isSpecialMesera = isOdalis(user.email ?? null, profile?.full_name ?? null);
 
+  // Mensaje del día (rota a diario por la lista de mensajes activos).
   const startToday = startOfTodayMX();
+  const dateKey = startToday.slice(0, 10); // YYYY-MM-DD en zona MX
+  let dailyMessage = DEFAULT_LOVE_MESSAGE;
+  if (isSpecialMesera) {
+    const { data: msgs } = await supabase
+      .from("love_messages")
+      .select("body")
+      .eq("active", true)
+      .order("sort_order", { ascending: true });
+    const bodies = (msgs ?? []).map((m) => m.body as string);
+    if (bodies.length > 0) {
+      const dayNumber = Math.floor(new Date(startToday).getTime() / 86400000);
+      dailyMessage = bodies[((dayNumber % bodies.length) + bodies.length) % bodies.length];
+    }
+  }
 
   const [pendRes, hoyRes] = await Promise.all([
     supabase
@@ -127,7 +136,13 @@ export default async function MeseraHome({
 
   return (
     <main className="mx-auto max-w-md px-4 py-6 pb-28">
-      {isSpecialMesera && <WelcomeOverlay userId={user.id} />}
+      {isSpecialMesera && (
+        <WelcomeOverlay
+          userId={user.id}
+          dateKey={dateKey}
+          message={dailyMessage}
+        />
+      )}
 
       {/* Bienvenida */}
       <header className="flex items-center justify-between gap-3">
@@ -150,7 +165,9 @@ export default async function MeseraHome({
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {isSpecialMesera && <WelcomeReplayButton userId={user.id} />}
+          {isSpecialMesera && (
+            <WelcomeReplayButton userId={user.id} dateKey={dateKey} />
+          )}
           <SignOutButton />
         </div>
       </header>

@@ -14,6 +14,7 @@ import {
 import { createOrder, updateOrderItems } from "@/app/panel/actions";
 import { QtyStepper } from "@/views/components/QtyStepper";
 import { OrderItemPicker } from "./OrderItemPicker";
+import { OrderToast } from "./OrderToast";
 
 interface OrderBuilderProps {
   menu: MenuCategory[];
@@ -91,6 +92,8 @@ export function OrderBuilder({ menu, mode, orderId, initial }: OrderBuilderProps
 
   return (
     <div className="mx-auto max-w-md px-4 pb-32 pt-6">
+      <OrderToast />
+
       <Link
         href={mode === "edit" && orderId ? `/panel/mesera/${orderId}` : "/panel/mesera"}
         className="pressable inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink"

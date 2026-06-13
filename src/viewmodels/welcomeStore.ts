@@ -6,20 +6,25 @@ export interface WelcomeStore {
   subscribe: (cb: () => void) => () => void;
   getSnapshot: () => Snapshot;
   getServerSnapshot: () => Snapshot;
-  /** Reabre el mensaje manualmente (aunque ya se haya visto). */
+  /** Reabre el mensaje manualmente (con el botón de corazón). */
   open: () => void;
-  /** Cierra y marca como visto (no vuelve a salir solo). */
+  /** Cierra y marca como visto HOY (no vuelve a salir solo hasta mañana). */
   dismiss: () => void;
 }
 
-// Una instancia por usuario, compartida entre el overlay y el botón de repetir.
+// Una instancia por usuario+día, compartida entre el overlay y el botón.
 const cache = new Map<string, WelcomeStore>();
 
-export function getWelcomeStore(userId: string): WelcomeStore {
-  const key = `eb-welcome-${userId}`;
-  const existing = cache.get(key);
+/**
+ * Muestra la bienvenida una vez al día (compara `dateKey` con lo guardado).
+ * Cada día nuevo vuelve a salir sola; el corazón la reabre cuando quiera.
+ */
+export function getWelcomeStore(userId: string, dateKey: string): WelcomeStore {
+  const cacheKey = `${userId}:${dateKey}`;
+  const existing = cache.get(cacheKey);
   if (existing) return existing;
 
+  const seenKey = `eb-welcome-date-${userId}`;
   const listeners = new Set<() => void>();
   let manualOpen = false;
   const notify = () => listeners.forEach((l) => l());
@@ -32,7 +37,7 @@ export function getWelcomeStore(userId: string): WelcomeStore {
     getSnapshot() {
       if (manualOpen) return "show";
       try {
-        return localStorage.getItem(key) ? "hide" : "show";
+        return localStorage.getItem(seenKey) === dateKey ? "hide" : "show";
       } catch {
         return "hide";
       }
@@ -46,7 +51,7 @@ export function getWelcomeStore(userId: string): WelcomeStore {
     },
     dismiss() {
       try {
-        localStorage.setItem(key, "1");
+        localStorage.setItem(seenKey, dateKey);
       } catch {
         /* noop */
       }
@@ -55,6 +60,6 @@ export function getWelcomeStore(userId: string): WelcomeStore {
     },
   };
 
-  cache.set(key, store);
+  cache.set(cacheKey, store);
   return store;
 }
